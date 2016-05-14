@@ -25,6 +25,8 @@ function addTab(title, url) {
  * @param url
  */
 function showForm(title, option) {
+	$("#option").val(option);
+	$('#fm').form('clear');
 	var iconCls;
 	if ("edit" == option) {
 		var row = $("#tt").datagrid('getSelected');
@@ -32,27 +34,46 @@ function showForm(title, option) {
 			$.messager.alert('警告', '请选择需要修改的记录！', 'error');
 			return false;
 		}
-		$("#fm").attr("action",'/monitor/edit');
 		$('#fm').form('reset');
+		$("#fm").attr("action",'/stock/edit');
 		loadForm();
+		$("#submitDiv").show();
+	}else if ("view" == option) {
+		var row = $("#tt").datagrid('getSelected');
+		if(null == row){
+			$.messager.alert('警告', '请选择需要查看的记录！', 'error');
+			return false;
+		}
+		//将所有元素置成readonly
+		loadForm();
+		$("#submitDiv").hide();
 	}else{
-		$("#fm").attr("action",'/monitor/add');
+		$("#fm").attr("action",'/stock/add');
+		$("#submitDiv").show();
 	}
 	$('#dlg').window({
 		title : title,
-		width : '700',
+		width : '900',
 		height : '400',
-		left : '100px',
-		top : '70px',
+		left : '80px',
+		top : '50px',
 		iconCls : 'icon-edit',
 		modal : true,
-		closed : false
+		closed : false,
+		resize:true
 	}).window('open');
 }
 
 function submitForm() {
+	var url = "";
+	if($("#option").val() == "edit"){
+		url = "/stock/edit";
+	}else{
+		url = "/stock/add";
+	}
 	$('#fm').form('submit', {
 		dataType : 'json',
+		url: url,
 		success : function(data) {
 			data = $.parseJSON(data);
 			if (data.success) {

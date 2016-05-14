@@ -30,31 +30,27 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` VALUES ('1', 'admin', 'admin','管理员','男','admin@test.com','我是管理员');
 commit;
-
-
-CREATE TABLE `monitor_object_config` (
+/* 商品库存 */
+CREATE TABLE `goods_stock` (
   `id` int(11) NOT NULL auto_increment,
-  `appName` varchar(200) NOT NULL,
-  `appUrl` varchar(200) NOT NULL,
-  `appDesc` varchar(500) NULL,
-  `appStatus` int(1) NOT NULL, -- 0:shutdown,1:running
-  `accessCountMin` int(11) default 0 NULL,
-  `accessCountMax` int(11) default 100 NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `monitor_object_config` (`id`,`appName`,`appUrl`,`appDesc`,`appStatus`,`accessCountMin`,`accessCountMax`) VALUES (1,'百度','http://www.baidu.com','百度搜索1',0,50,1000);
-INSERT INTO `monitor_object_config` (`id`,`appName`,`appUrl`,`appDesc`,`appStatus`,`accessCountMin`,`accessCountMax`) VALUES (3,'网易','www.163.com','大爱网易。',1,50,300);
-INSERT INTO `monitor_object_config` (`id`,`appName`,`appUrl`,`appDesc`,`appStatus`,`accessCountMin`,`accessCountMax`) VALUES (4,'新浪','www.sina.cn','新浪微博',1,500,1000);
-INSERT INTO `monitor_object_config` (`id`,`appName`,`appUrl`,`appDesc`,`appStatus`,`accessCountMin`,`accessCountMax`) VALUES (5,'知乎','www.zhihu.com','综合性网站',1,100,500);
-commit;
-
-
-CREATE TABLE `monitor_log` (
-  `id` int(11) NOT NULL auto_increment,
-  `objectId` int(11) NOT NULL,
-  `appName` varchar(200) NOT NULL,
-  `appStatus` int(1) NOT NULL, -- 0:shutdown,1:running
-  `accessCount` int(11) default 0 NULL,
+  `goodsNum` varchar(200) NOT NULL,
+  `goodsName` varchar(200) NOT NULL,
+  `goodsStandard` varchar(200) NULL,
+  `goodsCategory` varchar(200) NULL,
+  `goodsPrice` double(10,2) NOT NULL,
+  `goodsDesc` varchar(2000) NULL,
+  
+  `stockWareName` varchar(200) NULL,
+  `stockShelfName` varchar(200) NULL,
+  `stockCount` int(11) default 0 NOT NULL,
+  
+  `lastStockInTime` varchar(200) NULL,
+  `lastStockInUser` varchar(200) NULL,
+  `lastStockInCount` int(11) NULL,
+  
+  `lastStockOutTime` varchar(200) NULL,
+  `lastStockOutUser` varchar(200) NULL,
+  `lastStockOutCount` int(11) NULL,
+  
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

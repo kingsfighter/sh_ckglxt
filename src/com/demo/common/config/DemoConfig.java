@@ -5,6 +5,7 @@ import com.demo.common.model._MappingKit;
 import com.demo.common.plugin.MonitorThreadPlugin;
 import com.demo.index.IndexController;
 import com.demo.monitor.MonitorController;
+import com.demo.stock.GoodsStockController;
 import com.demo.user.UserController;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -41,6 +42,7 @@ public class DemoConfig extends JFinalConfig {
         me.add("/blog", BlogController.class); // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
         me.add("/user", UserController.class, "/WEB-INF/jsp/user/");
         me.add("/monitor", MonitorController.class, "/WEB-INF/jsp/monitor/");
+        me.add("/stock", GoodsStockController.class, "/WEB-INF/jsp/stock/");
     }
 
     public static C3p0Plugin createC3p0Plugin() {
